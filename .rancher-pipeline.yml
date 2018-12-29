@@ -1,0 +1,19 @@
+stages:
+- name: compile
+  steps:
+  - runScriptConfig:
+      image: demo:1.0.0
+      shellScript: mvn clean package
+- name: publish
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: demo:1.0.0
+      pushRemote: true
+      registry: 192.168.1.244:8090/tis/
+- name: deploy
+  steps:
+  - applyYamlConfig:
+      path: ./deployment.yaml
+timeout: 60
