@@ -2,7 +2,7 @@ stages:
 - name: compile
   steps:
   - runScriptConfig:
-      image: maven:v1
+      image: maven
       shellScript: mvn clean package
 - name: publish
   steps:
